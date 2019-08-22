@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gb_cars list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cmake</th>
+                <th>Cmodel</th>
+                <th>Csteering</th>
+                <th>Cengcap</th>
+                <th>Cregyear</th>
+                <th>Cprice</th>
+                <th>Cfuel</th>
+                <th>Cbodystyle</th>
+                <th>Cextcolor</th>
+                <th>Cintcolor</th>
+                <th>Cdrivetype</th>
+                <th>Cdoors</th>
+                <th>Cvin</th>
+                <th>Cmodelcode</th>
+                <th>Cmileage</th>
+                <th>Ctrans</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gB_car in gB_cars %}
+            <tr>
+                <td><a href="{{ path('gb_car_show', { 'id': gB_car.id }) }}">{{ gB_car.id }}</a></td>
+                <td>{{ gB_car.cMake }}</td>
+                <td>{{ gB_car.cModel }}</td>
+                <td>{{ gB_car.cSteering }}</td>
+                <td>{{ gB_car.cEngCap }}</td>
+                <td>{{ gB_car.cRegYear }}</td>
+                <td>{{ gB_car.cPrice }}</td>
+                <td>{{ gB_car.cFuel }}</td>
+                <td>{{ gB_car.cBodyStyle }}</td>
+                <td>{{ gB_car.cExtColor }}</td>
+                <td>{{ gB_car.cIntColor }}</td>
+                <td>{{ gB_car.cDriveType }}</td>
+                <td>{{ gB_car.cDoors }}</td>
+                <td>{{ gB_car.cVin }}</td>
+                <td>{{ gB_car.cModelCode }}</td>
+                <td>{{ gB_car.cMileage }}</td>
+                <td>{{ gB_car.cTrans }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('gb_car_show', { 'id': gB_car.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gb_car_edit', { 'id': gB_car.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gb_car_new') }}">Create a new gB_car</a>
+        </li>
+    </ul>
+{% endblock %}

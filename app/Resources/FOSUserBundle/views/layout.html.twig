@@ -1,0 +1,54 @@
+{% extends 'base.html_bs4.twig' %}
+ {% block body %}
+
+    <div class="alert alert-primary" role="alert">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a> | 
+            <a href="{{ path('homepage') }}">
+                {{ 'Home'|trans() }}
+            </a>
+
+        {% else %}
+        
+            <a href="{{ path('homepage') }}">
+                {{ 'Home'|trans() }}
+            </a>
+
+        {% endif %}
+    </div>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('{{ asset('img/bg.jpg')}}');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+
+</style>
+
+{% endblock %}
+        
+

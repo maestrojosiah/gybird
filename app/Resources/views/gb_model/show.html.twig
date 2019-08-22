@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gb_model</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gB_model.id }}</td>
+            </tr>
+            <tr>
+                <th>Mdname</th>
+                <td>{{ gB_model.mdName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gb_model_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('gb_model_edit', { 'id': gB_model.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,129 @@
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">Shop Name</p>
+                <div class="list-group" style="text-align:center;">
+                <a href="#" class="list-group-item"><span class="ref">Make : </span>&nbsp;{{ gB_car.cMake }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Model : </span>&nbsp;{{ gB_car.cModel }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Steering : </span>&nbsp;{{ gB_car.cSteering }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Engine Capacity : </span>&nbsp;{{ gB_car.cEngCap }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Registration Year : </span>&nbsp;{{ gB_car.cRegYear }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Fuel : </span>&nbsp;{{ gB_car.cFuel }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Body Style : </span>&nbsp;{{ gB_car.cBodyStyle }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Exterior Color : </span>&nbsp;{{ gB_car.cExtColor }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Internal Color : </span>&nbsp;{{ gB_car.cIntColor }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Drive Type : </span>&nbsp;{{ gB_car.cDriveType }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Doors : </span>&nbsp;{{ gB_car.cDoors }}</a>
+                <a href="#" class="list-group-item"><span class="ref">VIN : </span>&nbsp;{{ gB_car.cVin }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Model Code : </span>&nbsp;{{ gB_car.cModelCode }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Mileage : </span>&nbsp;{{ gB_car.cMileage }}</a>
+                <a href="#" class="list-group-item"><span class="ref">Transmission : </span>&nbsp;{{ gB_car.cTrans }}</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="thumbnail">
+                    <img class="img-responsive" style="max-width:800px; max-height:500px;" src="{{gB_car.image}}" alt="">
+                    <hr />
+                    <div class="caption-full">
+                        <h4 class="pull-right">{{ gB_car.cPrice|number_format(0, '.', ',') }}</h4>
+                        <h4><a href="#">Product Name</a>
+                        </h4>
+                        <p>See more snippets like these online store reviews at <a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                        <p>Want to make these reviews work? Check out <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a></strong> over at maxoffsky.com!</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    </div>
+                    <div class="ratings">
+                        <p class="pull-right">3 reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            4.0 stars
+                        </p>
+                    </div>
+                </div>
+
+                <div class="well">
+
+                    <div class="text-right">
+                        <a class="btn btn-success">Leave a Review</a>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Anonymous
+                            <span class="pull-right">10 days ago</span>
+                            <p>This product was great in terms of quality. I would definitely buy another!</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Anonymous
+                            <span class="pull-right">12 days ago</span>
+                            <p>I've alredy ordered another one!</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Anonymous
+                            <span class="pull-right">15 days ago</span>
+                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+        <hr>
+
+{% if is_granted('ROLE_ADMIN') %}
+    <ul>
+        <li>
+            <a href="{{ path('gb_car_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('gb_car_edit', { 'id': gB_car.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endif %}

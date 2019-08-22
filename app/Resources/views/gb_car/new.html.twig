@@ -1,0 +1,213 @@
+{% extends 'base_admin.html.twig' %}
+{% block body %}
+
+{% include("admin/admin_header.html.twig") %}
+{% include("admin/admin_aside.html.twig") %}
+</div>
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-file-text-o"></i> Add a car</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="index.html">Admin</a></li>
+              <li><i class="icon_document_alt"></i>Cars</li>
+              <li><i class="fa fa-file-text-o"></i>Add New</li>
+            </ol>
+          </div>
+        </div>
+
+
+    
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Add a car
+              </header>
+              <div class="panel-body">
+
+                <div class="col-md-12 col-sm-12 col-md-12">
+                    <div class="panel-body">
+                        {# <div id="sendmessage">Your message has been sent. Thank you!</div> #}
+                        <div id="errormessage"></div>
+
+                        {{ form_start(form, {'attr': {'class': 'contactForm lead', 'id': 'purchace_form', 'role': 'form'}}) }}
+
+                        {# <form action="" method="post" id="purchace_form" role="form" class="contactForm lead"> #}
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Make:</label>
+                            {{ form_widget(form.cMake, { 'attr': {'placeholder': 'Car Make'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cMake, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Model:</label>
+                            {{ form_widget(form.cModel, { 'attr': {'placeholder': 'Car Model'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cModel, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Steering:</label>
+                            {{ form_widget(form.cSteering, { 'attr': {'placeholder': 'Steering'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cSteering, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Engine Capacity:</label>
+                            {{ form_widget(form.cEngCap, { 'attr': {'placeholder': 'Engine Capacity'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cEngCap, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Price:</label>
+                            {{ form_widget(form.cPrice, { 'attr': {'placeholder': 'Price'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cPrice, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Fuel:</label>
+                            {{ form_widget(form.cFuel, { 'attr': {'placeholder': 'Fuel'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cFuel, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Body Style:</label>
+                            {{ form_widget(form.cBodyStyle, { 'attr': {'placeholder': 'Body Style'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cBodyStyle, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Drive Type:</label>
+                            {{ form_widget(form.cDriveType, { 'attr': {'placeholder': 'Drive Type'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cDriveType, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Exterior Color:</label>
+                            {{ form_widget(form.cExtColor, { 'attr': {'placeholder': 'Exterior Color'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cExtColor, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Interior Color:</label>
+                            {{ form_widget(form.cIntColor, { 'attr': {'placeholder': 'Interior'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cIntColor, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Vehicle Identification Number (VIN):</label>
+                            {{ form_widget(form.cVin, { 'attr': {'placeholder': 'VIN'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cVin, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Doors:</label>
+                            {{ form_widget(form.cDoors, { 'attr': {'placeholder': 'Doors'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cDoors, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Regestration Year:</label>
+                            {{ form_widget(form.cRegYear, { 'attr': {'placeholder': 'Regestration Year'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cRegYear, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Mileage:</label>
+                            {{ form_widget(form.cMileage, { 'attr': {'placeholder': 'Mileage'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cMileage, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Model Code:</label>
+                            {{ form_widget(form.cModelCode, { 'attr': {'placeholder': 'Model Code'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cModelCode, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Transmission:</label>
+                            {{ form_widget(form.cTrans, { 'attr': {'placeholder': 'Transmission'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.cTrans, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Availability:</label>
+                            {{ form_widget(form.availability, { 'attr': {'placeholder': 'Availability'|trans, 'class': 'form-control' }}) }}
+                            {{ form_errors(form.availability, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div> 
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                            <label for="sel1">Image:</label>
+                            {{ form_widget(form.image, { 'attr': {'class': 'form-control' }}) }}
+                            {{ form_errors(form.image, { 'attr': {'class': 'validation'}} ) }}
+                            </div> 
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Create" class="btn btn-skin btn-lg">
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+              </div>
+            </section>
+          </div>
+
+        </div>
+
+        <ul>
+            <li>
+                <a href="{{ path('gb_car_index') }}">Back to the list</a>
+            </li>
+        </ul>
+
+      </section>
+    </section>
+
+{% include ('footer.html.twig') %}
+{% endblock %}

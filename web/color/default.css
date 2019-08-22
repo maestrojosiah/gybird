@@ -1,0 +1,120 @@
+/*
+#1 color = #A81528;
+#2 color = #A81528;
+*/
+
+a:hover,
+a:focus {
+    color: #A81528;
+}
+
+.circled {
+	background: #A81528;
+}
+
+.con1 > div, .con2 > div, .con3 > div { 
+	background-color: #A81528;
+}
+
+.scrollup:hover {
+	background: #A81528;
+}
+
+
+/* service */
+
+.service-icon span {
+	color: #A81528;
+}
+
+
+
+/* button */
+.btn-skin {
+  background-color: #A81528;
+  border-color: #A81528;
+}
+
+
+/* top */
+.top-area {
+	background: #A81528;
+}
+
+/* menu */
+
+.navbar-custom ul.nav ul.dropdown-menu li a:hover {
+	color: #A81528;
+}
+.navbar-custom.top-nav-collapse .nav li a:hover,
+.navbar-custom .nav li a:hover,
+.navbar-custom .nav li.active a,.navbar-custom.top-nav-collapse .nav li.active a  {
+    color: #A81528;
+}
+
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+    background-color: #A81528;
+}
+
+
+.bg-skin {
+	background: #A81528;
+}
+
+.highlight-color {
+	background-color: #A81528;
+}
+.color {
+	color: #A81528;
+}
+
+/* pricing box  */
+.pricing-content.featured h2,.pricing-content.featured .price-bottom {
+	background-color:#A81528;
+}
+.pricing-content.featured h3 {
+	background:#A81528;
+}
+
+
+
+/* team */
+.cbp-l-grid-team-name {
+    color: #A81528;
+}
+
+.cbp-l-filters-button .cbp-filter-counter {
+	background-color: #A81528;
+}
+
+.cbp-l-filters-alignLeft .cbp-filter-item-active {
+    /* @editable properties */
+    background-color: #A81528;
+    border:1px solid #A81528;
+}
+
+.cbp-l-filters-dropdownWrap {
+    background: #A81528;
+}
+.cbp-l-filters-button .cbp-filter-item.cbp-filter-item-active {
+    /* @editable properties */
+    background-color: #A81528;
+    border-color: #A81528;
+}
+.cbp-l-caption-buttonLeft,
+.cbp-l-caption-buttonRight {
+    /* @editable properties */
+    background-color: #A81528;
+}
+
+.cbp-l-caption-buttonLeft:hover,
+.cbp-l-caption-buttonRight:hover {
+    /* @editable properties */
+    background-color: #A81528;
+}
+
+.form-control:focus {
+  border-color: #A81528;
+}

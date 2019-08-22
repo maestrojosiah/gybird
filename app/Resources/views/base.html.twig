@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Gybird Motors{% endblock %}</title>
+        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- css -->
+
+        <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/cubeportfolio/css/cubeportfolio.min.css')}}">
+        <link href="{{ asset('css/nivo-lightbox.css')}}" rel="stylesheet" />
+        <link href="{{ asset('css/nivo-lightbox-theme/default/default.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/owl.carousel.css')}}" rel="stylesheet" media="screen" />
+        <link href="{{ asset('css/owl.theme.css')}}" rel="stylesheet" media="screen" />
+        <link href="{{ asset('css/animate.css')}}" rel="stylesheet" />
+        <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+
+        <!-- boxed bg -->
+        <link id="bodybg" href="{{ asset('bodybg/bg1.css')}}" rel="stylesheet" type="text/css" />
+        <!-- template skin -->
+        <link id="t-colors" href="{{ asset('color/default.css')}}" rel="stylesheet">
+        {% block stylesheets %}{% endblock %}
+
+    </head>
+    <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+        {% block body %}
+        
+   
+        {% endblock %}
+        
+        <!-- Core JavaScript Files -->
+        <script src="{{ asset('js/jquery.min.js')}}"></script>
+        <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('js/jquery.easing.min.js')}}"></script>
+        <script src="{{ asset('js/wow.min.js')}}"></script>
+        <script src="{{ asset('js/jquery.scrollTo.js')}}"></script>
+        <script src="{{ asset('js/jquery.appear.js')}}"></script>
+        <script src="{{ asset('js/stellar.js')}}"></script>
+        <script src="{{ asset('plugins/cubeportfolio/js/jquery.cubeportfolio.min.js')}}"></script>
+        <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
+        <script src="{{ asset('js/nivo-lightbox.min.js')}}"></script>
+        <script src="{{ asset('js/custom.js')}}"></script>
+        {# <script src="{{ asset('js/jquery.matchHeight-min.js')}}"></script> #}
+
+        {% block javascripts %}
+        
+        {% endblock %}
+    </body>
+</html>

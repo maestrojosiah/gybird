@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gb_presentation</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gB_presentation.id }}</td>
+            </tr>
+            <tr>
+                <th>Pphotopath</th>
+                <td>{{ gB_presentation.pPhotoPath }}</td>
+            </tr>
+            <tr>
+                <th>Pdescription</th>
+                <td>{{ gB_presentation.pDescription }}</td>
+            </tr>
+            <tr>
+                <th>Pdeleted</th>
+                <td>{{ gB_presentation.pDeleted }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gb_presentation_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('gb_presentation_edit', { 'id': gB_presentation.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

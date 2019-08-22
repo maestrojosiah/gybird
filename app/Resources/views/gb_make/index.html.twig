@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gb_makes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mname</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gB_make in gB_makes %}
+            <tr>
+                <td><a href="{{ path('gb_make_show', { 'id': gB_make.id }) }}">{{ gB_make.id }}</a></td>
+                <td>{{ gB_make.mName }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('gb_make_show', { 'id': gB_make.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gb_make_edit', { 'id': gB_make.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gb_make_new') }}">Create a new gB_make</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gb_presentations list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Pphotopath</th>
+                <th>Pdescription</th>
+                <th>Pdeleted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gB_presentation in gB_presentations %}
+            <tr>
+                <td><a href="{{ path('gb_presentation_show', { 'id': gB_presentation.id }) }}">{{ gB_presentation.id }}</a></td>
+                <td>{{ gB_presentation.pPhotoPath }}</td>
+                <td>{{ gB_presentation.pDescription }}</td>
+                <td>{{ gB_presentation.pDeleted }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('gb_presentation_show', { 'id': gB_presentation.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gb_presentation_edit', { 'id': gB_presentation.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gb_presentation_new') }}">Create a new gB_presentation</a>
+        </li>
+    </ul>
+{% endblock %}

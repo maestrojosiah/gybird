@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gb_testimonial</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gB_testimonial.id }}</td>
+            </tr>
+            <tr>
+                <th>Trating</th>
+                <td>{{ gB_testimonial.tRating }}</td>
+            </tr>
+            <tr>
+                <th>Tcomment</th>
+                <td>{{ gB_testimonial.tComment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gb_testimonial_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('gb_testimonial_edit', { 'id': gB_testimonial.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gb_testimonials list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Trating</th>
+                <th>Tcomment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gB_testimonial in gB_testimonials %}
+            <tr>
+                <td><a href="{{ path('gb_testimonial_show', { 'id': gB_testimonial.id }) }}">{{ gB_testimonial.id }}</a></td>
+                <td>{{ gB_testimonial.tRating }}</td>
+                <td>{{ gB_testimonial.tComment }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('gb_testimonial_show', { 'id': gB_testimonial.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gb_testimonial_edit', { 'id': gB_testimonial.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gb_testimonial_new') }}">Create a new gB_testimonial</a>
+        </li>
+    </ul>
+{% endblock %}

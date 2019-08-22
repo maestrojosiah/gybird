@@ -1,0 +1,143 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Presentation
+ *
+ * @ORM\Table(name="presentation")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PresentationRepository")
+ */
+class GB_presentation
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="p_photo_path", type="string", length=255)
+     * @Assert\NotBlank(message="Please, upload the product image as a png or jpg image.")
+     * @Assert\File(mimeTypes={ "image/png", "image/jpg", "image/jpeg" })
+     */
+    private $pPhotoPath;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="p_description", type="string", length=255)
+     */
+    private $pDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="p_deleted", type="string", length=255)
+     */
+    private $pDeleted;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="presentations")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GB_car", inversedBy="presentations")
+     * @ORM\JoinColumn(name="car_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $book;    
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set pPhotoPath
+     *
+     * @param string $pPhotoPath
+     *
+     * @return Presentation
+     */
+    public function setPPhotoPath($pPhotoPath)
+    {
+        $this->pPhotoPath = $pPhotoPath;
+
+        return $this;
+    }
+
+    /**
+     * Get pPhotoPath
+     *
+     * @return string
+     */
+    public function getPPhotoPath()
+    {
+        return $this->pPhotoPath;
+    }
+
+    /**
+     * Set pDescription
+     *
+     * @param string $pDescription
+     *
+     * @return Presentation
+     */
+    public function setPDescription($pDescription)
+    {
+        $this->pDescription = $pDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get pDescription
+     *
+     * @return string
+     */
+    public function getPDescription()
+    {
+        return $this->pDescription;
+    }
+
+    /**
+     * Set pDeleted
+     *
+     * @param string $pDeleted
+     *
+     * @return Presentation
+     */
+    public function setPDeleted($pDeleted)
+    {
+        $this->pDeleted = $pDeleted;
+
+        return $this;
+    }
+
+    /**
+     * Get pDeleted
+     *
+     * @return string
+     */
+    public function getPDeleted()
+    {
+        return $this->pDeleted;
+    }
+}
+
