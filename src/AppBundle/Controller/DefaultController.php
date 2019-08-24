@@ -17,7 +17,10 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $gB_cars = $em->getRepository('AppBundle:GB_car')->findAll();
+        $gB_cars = $em->getRepository('AppBundle:GB_car')->findBy(
+            array('deleted' => 0),
+            array('id' => 'DESC')
+        );
 
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
