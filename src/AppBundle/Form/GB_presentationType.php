@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class GB_presentationType extends AbstractType
 {
@@ -17,7 +18,7 @@ class GB_presentationType extends AbstractType
     {
         $builder
             ->add('pPhotoPath', FileType::class, array('label' => false, 'data_class' => null))
-            ->add('pDescription')
+            ->add('pDescription', CKEditorType::class)
             ;
     }/**
      * {@inheritdoc}

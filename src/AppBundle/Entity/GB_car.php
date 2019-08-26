@@ -689,4 +689,45 @@ class GB_car
     {
         return $this->user;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->presentations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add presentation
+     *
+     * @param \AppBundle\Entity\GB_presentation $presentation
+     *
+     * @return GB_car
+     */
+    public function addPresentation(\AppBundle\Entity\GB_presentation $presentation)
+    {
+        $this->presentations[] = $presentation;
+
+        return $this;
+    }
+
+    /**
+     * Remove presentation
+     *
+     * @param \AppBundle\Entity\GB_presentation $presentation
+     */
+    public function removePresentation(\AppBundle\Entity\GB_presentation $presentation)
+    {
+        $this->presentations->removeElement($presentation);
+    }
+
+    /**
+     * Get presentations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPresentations()
+    {
+        return $this->presentations;
+    }
 }

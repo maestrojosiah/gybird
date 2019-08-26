@@ -39,22 +39,6 @@ class GB_presentationController extends Controller
      */
     public function newAction(Request $request, $car_id)
     {
-        // $gB_presentation = new Gb_presentation();
-        // $form = $this->createForm('AppBundle\Form\GB_presentationType', $gB_presentation);
-        // $form->handleRequest($request);
-
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $em = $this->getDoctrine()->getManager();
-        //     $em->persist($gB_presentation);
-        //     $em->flush();
-
-        //     return $this->redirectToRoute('gb_presentation_show', array('id' => $gB_presentation->getId()));
-        // }
-
-        // return $this->render('gb_presentation/new.html.twig', array(
-        //     'gB_presentation' => $gB_presentation,
-        //     'form' => $form->createView(),
-        // ));
 
         $gB_presentation = new Gb_presentation();
         $form = $this->createForm('AppBundle\Form\GB_presentationType', $gB_presentation);

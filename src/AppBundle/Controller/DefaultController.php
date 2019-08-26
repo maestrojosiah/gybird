@@ -22,9 +22,18 @@ class DefaultController extends Controller
             array('id' => 'DESC')
         );
 
+        $car_makes = [];
+
+        foreach ($gB_cars as $key => $value) {
+            $car_makes[] = $value->getCMake();
+        }
+
+        $c_m = array_unique($car_makes);
+
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'gB_cars' => $gB_cars,
+            'car_makes' => $c_m,
         ]);
     }
 }

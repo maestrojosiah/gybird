@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Presentation
  *
- * @ORM\Table(name="presentation")
+ * @ORM\Table(name="g_b_presentation")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PresentationRepository")
  */
 class GB_presentation
@@ -55,7 +55,7 @@ class GB_presentation
      * @ORM\ManyToOne(targetEntity="GB_car", inversedBy="presentations")
      * @ORM\JoinColumn(name="car_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $book;    
+    private $car;    
 
 
     /**
@@ -139,5 +139,52 @@ class GB_presentation
     {
         return $this->pDeleted;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return GB_presentation
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set car
+     *
+     * @param \AppBundle\Entity\GB_car $car
+     *
+     * @return GB_presentation
+     */
+    public function setCar(\AppBundle\Entity\GB_car $car = null)
+    {
+        $this->car = $car;
+
+        return $this;
+    }
+
+    /**
+     * Get car
+     *
+     * @return \AppBundle\Entity\GB_car
+     */
+    public function getCar()
+    {
+        return $this->car;
+    }
+}

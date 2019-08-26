@@ -4,7 +4,7 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
+                <p class="lead">Gybird Motors</p>
                 <div class="list-group" style="text-align:center;">
                 <a href="#" class="list-group-item"><span class="ref">Make : </span>&nbsp;{{ gB_car.cMake }}</a>
                 <a href="#" class="list-group-item"><span class="ref">Model : </span>&nbsp;{{ gB_car.cModel }}</a>
@@ -31,11 +31,7 @@
                     <hr />
                     <div class="caption-full">
                         <h4 class="pull-right">{{ gB_car.cPrice|number_format(0, '.', ',') }}</h4>
-                        <h4><a href="#">Product Name</a>
-                        </h4>
-                        <p>See more snippets like these online store reviews at <a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                        <p>Want to make these reviews work? Check out <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a></strong> over at maxoffsky.com!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h4><a href="#">{{ gB_car.cMake }} {{ gB_car.cModel }}</a></h4>
                     </div>
                     <div class="ratings">
                         <p class="pull-right">3 reviews</p>
@@ -49,6 +45,28 @@
                         </p>
                     </div>
                 </div>
+
+                <!-- Section: boxes -->
+
+                <div class="row">
+                    {% set counter = 0 %}
+                    {% for presentation in gB_car.presentations %}
+                    {% set counter = counter + 1 %}
+                    {% if counter < 4 %}
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="height:200px;">
+                            <img src="{{presentation.pPhotoPath}}" class="img-responsive" />
+                            {{presentation.pDescription|raw}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="height:200px;">
+                        <a href="">
+                            <img src="/img/see_all.jpg" class="img-responsive" />
+                        </a>
+                    </div>
+                </div>
+
+                <!-- /Section: boxes -->
 
                 <div class="well">
 
@@ -119,11 +137,6 @@
         </li>
         <li>
             <a href="{{ path('gb_car_edit', { 'id': gB_car.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
         </li>
     </ul>
 {% endif %}

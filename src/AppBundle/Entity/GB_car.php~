@@ -169,6 +169,13 @@ class GB_car
      */
     private $user;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="GB_presentation", mappedBy="car")
+     */
+    private $presentations;
+
+
     /**
      * Get id
      *

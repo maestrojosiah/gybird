@@ -21,12 +21,10 @@
             <div id="filters-container" class="cbp-l-filters-alignLeft">
               <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">All (
                 <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".cardiologist" class="cbp-filter-item">Cardiologist (
+              {% for car_make in car_makes %}
+              <div data-filter=".{{car_make|lower}}" class="cbp-filter-item">{{car_make}} (
                 <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".psychiatrist" class="cbp-filter-item">Psychiatrist (
-                <div class="cbp-filter-counter"></div>)</div>
-              <div data-filter=".neurologist" class="cbp-filter-item">Neurologist (
-                <div class="cbp-filter-counter"></div>)</div>
+              {% endfor %}
             </div>
 
             <div id="grid-container" class="cbp-l-grid-team">
@@ -34,7 +32,7 @@
 
               {% for car in gB_cars %}
 
-                <li class="cbp-item psychiatrist">
+                <li class="cbp-item {{car.cMake|lower}}">
                   <a href="{{path('gb_car_show', {'id': car.id })}}" class="cbp-caption cbp-singlePage">
                     <div class="cbp-caption-defaultWrap">
                       <img src="{{car.image}}" alt="" width="100%">
