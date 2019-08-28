@@ -1,5 +1,5 @@
 
-    <div class="container">
+
 
         <div class="row">
 
@@ -34,14 +34,20 @@
                         <h4><a href="#">{{ gB_car.cMake }} {{ gB_car.cModel }}</a></h4>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">3 reviews</p>
+                        <p class="pull-right">{{number_of_voters}} reviews</p>
                         <p>
+                            {% set rounded_rating = average_of_ratings|round %}
+                            {% for i in 1..rounded_rating %}
                             <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
+                            {% endfor %}
+                            {% set remaining = 5 - rounded_rating %}
+                            {% if remaining > 0 %}
+                            {% for i in 1..remaining %}
                             <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 stars
+                            {% endfor %}
+                            {% endif %}
+                        
+                            {{average_of_ratings|round(1)}} stars
                         </p>
                     </div>
                 </div>
@@ -71,53 +77,37 @@
                 <div class="well">
 
                     <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
+                        
+                        {% if app.user|length > 0 %}
+                        <a href="{{path('gb_testimonial_new', {'car_id': gB_car.id })}}" class="btn btn-success"> Leave a Review </a>
+                        {% else %}
+                        <a href="{{path('fos_user_security_login')}}" class="btn btn-success"> Sign In to Leave a Review </a>
+                        {% endif %}
+                       
                     </div>
 
                     <hr>
-
+                    {% for testimonial in gB_car.testimonials %}
                     <div class="row">
                         <div class="col-md-12">
+                            {% for i in 1..testimonial.tRating %}
                             <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
+                            {% endfor %}
+                            {% set remaining = 5 - testimonial.tRating %}
+                            {% if remaining > 0 %}
+                            {% for i in 1..remaining %}
                             <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">10 days ago</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
+                            {% endfor %}
+                            {% endif %}
+                            {{testimonial.user.username}}
+                            <span class="pull-right">{{testimonial.submitted|date("jS F Y")}}</span>
+                            <p>{{testimonial.tComment}}</p>
                         </div>
                     </div>
 
                     <hr>
+                    {% endfor %}
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
-                    </div>
 
                 </div>
 
@@ -125,7 +115,6 @@
 
         </div>
 
-    </div>
     <!-- /.container -->
 
         <hr>

@@ -141,10 +141,24 @@ class GB_carController extends Controller
     public function showAction(GB_car $gB_car)
     {
         $deleteForm = $this->createDeleteForm($gB_car);
+        $em = $this->getDoctrine()->getManager();
+
+        $gB_testimonials = $em->getRepository('AppBundle:GB_testimonial')->findAll();
+        $ratings = [];
+        foreach ($gB_testimonials as $key => $testimonial) {
+            $ratings[] = $testimonial->getTRating();
+        }
+        
+        $number_of_voters = count($ratings);
+        $sum_of_ratings = array_sum($ratings);
+        $average_of_ratings = $sum_of_ratings / $number_of_voters;
 
         return $this->render('gb_car/show.html.twig', array(
             'gB_car' => $gB_car,
             'delete_form' => $deleteForm->createView(),
+            'average_of_ratings' => $average_of_ratings,
+            'sum_of_ratings' => $sum_of_ratings,
+            'number_of_voters' => $number_of_voters,
         ));
     }
 

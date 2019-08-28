@@ -163,7 +163,7 @@ class GB_car
      */
     private $deleted;
 
-        /**
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="cars")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -174,6 +174,11 @@ class GB_car
      * @ORM\OneToMany(targetEntity="GB_presentation", mappedBy="car")
      */
     private $presentations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GB_testimonial", mappedBy="car")
+     */
+    private $testimonials;
 
 
     /**
@@ -729,5 +734,39 @@ class GB_car
     public function getPresentations()
     {
         return $this->presentations;
+    }
+
+    /**
+     * Add testimonial
+     *
+     * @param \AppBundle\Entity\GB_testimonial $testimonial
+     *
+     * @return GB_car
+     */
+    public function addTestimonial(\AppBundle\Entity\GB_testimonial $testimonial)
+    {
+        $this->testimonials[] = $testimonial;
+
+        return $this;
+    }
+
+    /**
+     * Remove testimonial
+     *
+     * @param \AppBundle\Entity\GB_testimonial $testimonial
+     */
+    public function removeTestimonial(\AppBundle\Entity\GB_testimonial $testimonial)
+    {
+        $this->testimonials->removeElement($testimonial);
+    }
+
+    /**
+     * Get testimonials
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTestimonials()
+    {
+        return $this->testimonials;
     }
 }

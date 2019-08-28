@@ -1,21 +1,69 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block body %}
-    <h1>Gb_model edit</h1>
+{% include("admin/admin_header.html.twig") %}
+{% include("admin/admin_aside.html.twig") %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa fa-bars"></i> Edit </h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="{{path('admin_home_page')}}">Home</a></li>
+              <li><i class="fa fa-bars"></i><a href="{{path('gb_model_index')}}">List All Models</a></li>
+            </ol>
+          </div>
+        </div>
+        <!-- page start-->
+        <div class="row">
+
+          <div class="col-md-12 col-sm-12 col-md-12">
+            <div class="panel-body">
+                {# <div id="sendmessage">Your message has been sent. Thank you!</div> #}
+                <div id="errormessage"></div>
+
+                {{ form_start(edit_form, {'attr': {'class': 'contactForm lead', 'id': 'purchace_form', 'role': 'form'}}) }}
+
+                {# <form action="" method="post" id="purchace_form" role="form" class="contactForm lead"> #}
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                        <label for="sel1">Choose Make:</label>
+                        {{ form_widget(edit_form.make, { 'attr': {'placeholder': 'Car Make'|trans, 'class': 'form-control' }}) }}
+                        {{ form_errors(edit_form.make, { 'attr': {'class': 'validation'}} ) }}
+                        </div> 
+                    </div>                 
+                    
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                        <label for="sel1">Add Model:</label>
+                        {{ form_widget(edit_form.mdName, { 'attr': {'placeholder': 'Model'|trans, 'class': 'form-control' }}) }}
+                        {{ form_errors(edit_form.mdName, { 'attr': {'class': 'validation'}} ) }}
+                        </div> 
+                    </div> 
+
+                </div>
+
+                <input type="submit" value="Edit" class="btn btn-skin btn-lg">
+
+                {{ form_end(edit_form) }}
+       
+            </div>
+          </div>
+
+        </div>
 
     <ul>
         <li>
             <a href="{{ path('gb_model_index') }}">Back to the list</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
     </ul>
+
+        <!-- page end-->
+      </section>
+    </section>
+    <!--main content end-->
+
 {% endblock %}

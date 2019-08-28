@@ -34,10 +34,10 @@ class GB_testimonialController extends Controller
     /**
      * Creates a new gB_testimonial entity.
      *
-     * @Route("/new", name="gb_testimonial_new")
+     * @Route("/new/{car_id}", name="gb_testimonial_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $car_id)
     {
         $gB_testimonial = new Gb_testimonial();
         $form = $this->createForm('AppBundle\Form\GB_testimonialType', $gB_testimonial);
@@ -53,6 +53,7 @@ class GB_testimonialController extends Controller
 
         return $this->render('gb_testimonial/new.html.twig', array(
             'gB_testimonial' => $gB_testimonial,
+            'car_id' => $car_id,
             'form' => $form->createView(),
         ));
     }

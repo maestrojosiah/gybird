@@ -1,39 +1,61 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block body %}
-    <h1>Gb_models list</h1>
+{% include("admin/admin_header.html.twig") %}
+{% include("admin/admin_aside.html.twig") %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Mdname</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for gB_model in gB_models %}
-            <tr>
-                <td><a href="{{ path('gb_model_show', { 'id': gB_model.id }) }}">{{ gB_model.id }}</a></td>
-                <td>{{ gB_model.mdName }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('gb_model_show', { 'id': gB_model.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('gb_model_edit', { 'id': gB_model.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa fa-bars"></i> List</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="{{path('admin_home_page')}}">Home</a></li>
+              <li><i class="fa fa-bars"></i><a href="{{ path('gb_model_new') }}">Create a new Model</a></li>
+            </ol>
+          </div>
+        </div>
+        <!-- page start-->
 
-    <ul>
-        <li>
-            <a href="{{ path('gb_model_new') }}">Create a new gB_model</a>
-        </li>
-    </ul>
+        <div class="row">
+          <div class="col-sm-6">
+            <section class="panel">
+              <header class="panel-heading">
+                List of All Makes 
+              </header>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Model Name</th>
+                    <th>For</th>
+                    <th>Manage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for gB_model in gB_models %}
+                  <tr>
+                    <td>
+                        {{ gB_model.mdName }}
+                    </td>
+                    <td>
+                        {{ gB_model.make }}
+                    </td>
+                    <td>
+                        <a href="{{ path('gb_model_show', { 'id': gB_model.id }) }}">show</a> &nbsp; | &nbsp;
+                        <a href="{{ path('gb_model_edit', { 'id': gB_model.id }) }}">edit</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+
+        <!-- page end-->
+      </section>
+    </section>
+    <!--main content end-->
+
 {% endblock %}

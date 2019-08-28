@@ -25,6 +25,11 @@ class User extends BaseUser
     private $cars;
 
     /**
+     * @ORM\OneToMany(targetEntity="GB_testimonial", mappedBy="user")
+     */
+    private $testimonials;
+
+    /**
      * @ORM\OneToMany(targetEntity="GB_presentation", mappedBy="user")
      */
     private $presentations;
@@ -68,5 +73,73 @@ class User extends BaseUser
     public function getCars()
     {
         return $this->cars;
+    }
+
+    /**
+     * Add presentation
+     *
+     * @param \AppBundle\Entity\GB_presentation $presentation
+     *
+     * @return User
+     */
+    public function addPresentation(\AppBundle\Entity\GB_presentation $presentation)
+    {
+        $this->presentations[] = $presentation;
+
+        return $this;
+    }
+
+    /**
+     * Remove presentation
+     *
+     * @param \AppBundle\Entity\GB_presentation $presentation
+     */
+    public function removePresentation(\AppBundle\Entity\GB_presentation $presentation)
+    {
+        $this->presentations->removeElement($presentation);
+    }
+
+    /**
+     * Get presentations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPresentations()
+    {
+        return $this->presentations;
+    }
+
+    /**
+     * Add testimonial
+     *
+     * @param \AppBundle\Entity\GB_testimonial $testimonial
+     *
+     * @return User
+     */
+    public function addTestimonial(\AppBundle\Entity\GB_testimonial $testimonial)
+    {
+        $this->testimonials[] = $testimonial;
+
+        return $this;
+    }
+
+    /**
+     * Remove testimonial
+     *
+     * @param \AppBundle\Entity\GB_testimonial $testimonial
+     */
+    public function removeTestimonial(\AppBundle\Entity\GB_testimonial $testimonial)
+    {
+        $this->testimonials->removeElement($testimonial);
+    }
+
+    /**
+     * Get testimonials
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTestimonials()
+    {
+        return $this->testimonials;
     }
 }

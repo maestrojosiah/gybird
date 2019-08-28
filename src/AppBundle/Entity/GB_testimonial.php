@@ -37,6 +37,28 @@ class GB_testimonial
 
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="submitted", type="datetime")
+     */
+    private $submitted;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="testimonials")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="GB_car", inversedBy="testimonials")
+     * @ORM\JoinColumn(name="car_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $car;
+
+    
+
+
+    /**
      * Get id
      *
      * @return int
@@ -92,5 +114,77 @@ class GB_testimonial
     public function getTComment()
     {
         return $this->tComment;
+    }
+
+    /**
+     * Set submitted
+     *
+     * @param \DateTime $submitted
+     *
+     * @return GB_testimonial
+     */
+    public function setSubmitted($submitted)
+    {
+        $this->submitted = $submitted;
+
+        return $this;
+    }
+
+    /**
+     * Get submitted
+     *
+     * @return \DateTime
+     */
+    public function getSubmitted()
+    {
+        return $this->submitted;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return GB_testimonial
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set car
+     *
+     * @param \AppBundle\Entity\GB_car $car
+     *
+     * @return GB_testimonial
+     */
+    public function setCar(\AppBundle\Entity\GB_car $car = null)
+    {
+        $this->car = $car;
+
+        return $this;
+    }
+
+    /**
+     * Get car
+     *
+     * @return \AppBundle\Entity\GB_car
+     */
+    public function getCar()
+    {
+        return $this->car;
     }
 }

@@ -15,5 +15,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-/web/img/cars/
-/web/img/gB_cars/
+/web/img/cars/*
+/web/img/gB_cars/*
