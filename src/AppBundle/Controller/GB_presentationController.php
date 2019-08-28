@@ -32,6 +32,27 @@ class GB_presentationController extends Controller
     }
 
     /**
+     * Lists all gB_presentation entities for a given car.
+     *
+     * @Route("/car/{car_id}", name="gb_presentation_index_all")
+     * @Method("GET")
+     */
+    public function indexAllAction($car_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $gB_presentations = $em->getRepository('AppBundle:GB_presentation')->findBy(
+            array(
+                'car' => $car_id,
+            )
+        );
+
+        return $this->render('gb_presentation/show_all.html.twig', array(
+            'gB_presentations' => $gB_presentations,
+        ));
+    }
+
+    /**
      * Creates a new gB_presentation entity.
      *
      * @Route("/new/{car_id}", name="gb_presentation_new")
@@ -102,17 +123,41 @@ class GB_presentationController extends Controller
         $editForm = $this->createForm('AppBundle\Form\GB_presentationType', $gB_presentation);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        // if ($editForm->isSubmitted() && $editForm->isValid()) {
+        //     $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('gb_presentation_edit', array('id' => $gB_presentation->getId()));
+        //     return $this->redirectToRoute('gb_presentation_edit', array('id' => $gB_presentation->getId()));
+        // }
+
+        $car = $gB_presentation->getCar();
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $photo_path = $editForm->get('pPhotoPath')->getData();
+            $make = $car->getCMake();
+            $car_title = $car->getCModel();
+            $trimmed_title = str_replace(" ", "_", $car_title);
+            $originalName = $photo_path->getClientOriginalName();;
+            $filepath = $this->get('kernel')->getProjectDir()."/web/img/cars/$make/$trimmed_title/";
+            $photo_path->move($filepath, $originalName);
+            $simple_filepath = "/img/cars/$make/$trimmed_title/";
+            $gB_presentation->setPPhotoPath($simple_filepath . $originalName);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($gB_presentation);
+            $em->flush();
+
+            return $this->redirectToRoute('gb_car_show_admin', array('id' => $gB_presentation->getCar()->getId()));
         }
 
         return $this->render('gb_presentation/edit.html.twig', array(
             'gB_presentation' => $gB_presentation,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'car' => $gB_presentation->getCar(),
         ));
+
+
+
+
     }
 
     /**

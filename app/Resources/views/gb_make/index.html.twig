@@ -1,39 +1,57 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block body %}
-    <h1>Gb_makes list</h1>
+{% include("admin/admin_header.html.twig") %}
+{% include("admin/admin_aside.html.twig") %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Mname</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for gB_make in gB_makes %}
-            <tr>
-                <td><a href="{{ path('gb_make_show', { 'id': gB_make.id }) }}">{{ gB_make.id }}</a></td>
-                <td>{{ gB_make.mName }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('gb_make_show', { 'id': gB_make.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('gb_make_edit', { 'id': gB_make.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa fa-bars"></i> List</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="{{path('admin_home_page')}}">Home</a></li>
+              <li><i class="fa fa-plus"></i><a href="{{ path('gb_make_new') }}">Add A New Make</a></li>
+            </ol>
+          </div>
+        </div>
+        <!-- page start-->
+        <div class="row">
+          <div class="col-sm-6">
+            <section class="panel">
+              <header class="panel-heading">
+                List of All Makes 
+              </header>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Make Name</th>
+                    <th>Manage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for gB_make in gB_makes %}
+                  <tr>
+                    <td>
+                        {{gB_make.mName}}
+                    </td>
+                    <td>
+                        <a href="{{ path('gb_make_edit', { 'id': gB_make.id }) }}">edit</a> &nbsp; | &nbsp;
+                        <a href="{{ path('gb_make_show', { 'id': gB_make.id }) }}">show</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('gb_make_new') }}">Create a new gB_make</a>
-        </li>
-    </ul>
+        <!-- page end-->
+      </section>
+    </section>
+    <!--main content end-->
+  </div>
+</div>
 {% endblock %}

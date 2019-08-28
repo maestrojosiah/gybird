@@ -36,6 +36,37 @@ class GB_carController extends Controller
     }
 
     /**
+     * Lists all gB_car entities with photos.
+     *
+     * @Route("/all", name="gb_car_show_all")
+     * @Method("GET")
+     */
+    public function showAllAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $gB_cars = $em->getRepository('AppBundle:GB_car')->findBy(
+            array('deleted' => 0),
+            array('id' => 'DESC')
+        );
+
+        $car_makes = [];
+
+        foreach ($gB_cars as $key => $value) {
+            $car_makes[] = $value->getCMake();
+        }
+
+        $c_m = array_unique($car_makes);
+
+
+
+        return $this->render('gb_car/index_all.html.twig', array(
+            'gB_cars' => $gB_cars,
+            'car_makes' => $c_m,
+        ));
+    }
+
+    /**
      * Lists all deleted gB_car entities.
      *
      * @Route("/deleted", name="gb_car_deleted_index")

@@ -29,8 +29,12 @@
 
             <div id="grid-container" class="cbp-l-grid-team">
               <ul>
+              
+              {% set counter = 0 %}
 
               {% for car in gB_cars %}
+              {% set counter = counter + 1 %}
+              {% if counter < 8 %}
 
                 <li class="cbp-item {{car.cMake|lower}}">
                   <a href="{{path('gb_car_show', {'id': car.id })}}" class="cbp-caption cbp-singlePage">
@@ -40,7 +44,7 @@
                     <div class="cbp-caption-activeWrap">
                       <div class="cbp-l-caption-alignCenter">
                         <div class="cbp-l-caption-body">
-                          <div class="cbp-l-caption-text">VIEW PROFILE</div>
+                          <div class="cbp-l-caption-text">VIEW CAR</div>
                         </div>
                       </div>
                     </div>
@@ -48,12 +52,15 @@
                   <a href="{{path('gb_car_show', {'id': car.id})}}" class="cbp-singlePage cbp-l-grid-team-name">{{car.cMake}} {{car.cModel}}</a>
                   <div class="cbp-l-grid-team-position">Kes {{car.cPrice|number_format(0, '.', ',')}}</div>
                 </li>
+              {% endif %}
 
               {% endfor %}
-
               </ul>
+              
             </div>
+              
           </div>
+          
         </div>
       </div>
 

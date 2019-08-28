@@ -62,7 +62,7 @@
                 <h2>Images for this car</h2>
                     {% for presentation in gB_car.presentations %}
                     <div class="col-md-3 col-sm-6 col-xs-12" style="height:200px;">
-                        <a href="">
+                        <a href="{{path('gb_presentation_show', {'id': presentation.id })}}">
                             <img src="{{presentation.pPhotoPath}}" class="img-responsive" />
                             {{presentation.pDescription|raw}}
                         </a>
@@ -79,9 +79,6 @@
 
         </div>
 
-    </div>
-    <!-- /.container -->
-        </div>
 
      </section>
   </section>

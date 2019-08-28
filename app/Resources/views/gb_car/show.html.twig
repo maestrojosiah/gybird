@@ -27,7 +27,7 @@
             <div class="col-md-9">
 
                 <div class="thumbnail">
-                    <img class="img-responsive" style="max-width:800px; max-height:500px;" src="{{gB_car.image}}" alt="">
+                    <img class="img-responsive" src="{{gB_car.image}}" alt="">
                     <hr />
                     <div class="caption-full">
                         <h4 class="pull-right">{{ gB_car.cPrice|number_format(0, '.', ',') }}</h4>
@@ -53,14 +53,14 @@
                     {% for presentation in gB_car.presentations %}
                     {% set counter = counter + 1 %}
                     {% if counter < 4 %}
-                    <div class="col-md-3 col-sm-6 col-xs-12" style="height:200px;">
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-height:200px;">
                             <img src="{{presentation.pPhotoPath}}" class="img-responsive" />
                             {{presentation.pDescription|raw}}
                     </div>
                     {% endif %}
                     {% endfor %}
                     <div class="col-md-3 col-sm-6 col-xs-12" style="height:200px;">
-                        <a href="">
+                        <a href="{{path('gb_presentation_index_all', {'car_id': gB_car.id })}}">
                             <img src="/img/see_all.jpg" class="img-responsive" />
                         </a>
                     </div>
