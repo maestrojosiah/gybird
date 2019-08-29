@@ -31,7 +31,7 @@ class GB_testimonial
     /**
      * @var string
      *
-     * @ORM\Column(name="t_comment", type="string", length=255)
+     * @ORM\Column(name="t_comment", type="string", length=2550)
      */
     private $tComment;
 

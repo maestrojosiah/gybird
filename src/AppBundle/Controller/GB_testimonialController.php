@@ -80,7 +80,7 @@ class GB_testimonialController extends Controller
      * @Route("/{id}/edit", name="gb_testimonial_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, GB_testimonial $gB_testimonial)
+    public function editAction(Request $request, GB_testimonial $gB_testimonial, $id)
     {
         $deleteForm = $this->createDeleteForm($gB_testimonial);
         $editForm = $this->createForm('AppBundle\Form\GB_testimonialType', $gB_testimonial);
@@ -95,6 +95,7 @@ class GB_testimonialController extends Controller
         return $this->render('gb_testimonial/edit.html.twig', array(
             'gB_testimonial' => $gB_testimonial,
             'edit_form' => $editForm->createView(),
+            'testimonial_id' => $id,
             'delete_form' => $deleteForm->createView(),
         ));
     }

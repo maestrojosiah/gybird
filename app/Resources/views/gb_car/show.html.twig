@@ -1,6 +1,17 @@
+        {% block stylesheets %}
 
-
-
+        <!-- Start of Async Callbell Code -->
+        <script>
+        window.callbellSettings = {
+            token: "kqPtHk2pwv79BnSP6agPGk5y"
+        };
+        </script>
+        <script>
+        (function(){var w=window;var ic=w.callbell;if(typeof ic==="function"){ic('reattach_activator');ic('update',callbellSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Callbell=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://dash.callbell.eu/include/'+window.callbellSettings.token+'.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
+        </script>
+        <!-- End of Async Callbell Code -->
+        {% endblock %}
+        
         <div class="row">
 
             <div class="col-md-3">
@@ -116,8 +127,21 @@
         </div>
 
     <!-- /.container -->
-
         <hr>
+                
+        <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/5d67bba477aa790be33164e1/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+        <!--End of Tawk.to Script-->
 
 {% if is_granted('ROLE_ADMIN') %}
     <ul>

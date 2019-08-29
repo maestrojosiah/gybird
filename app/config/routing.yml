@@ -6,9 +6,9 @@ fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 
-admin_home_page:
-    path: /admin_home
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template: admin.html.twig
+# admin_home_page:
+#     path: /admin_home
+#     defaults:
+#         _controller: FrameworkBundle:Template:template
+#         template: admin.html.twig
         

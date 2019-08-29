@@ -15,7 +15,7 @@ class AjaxController extends Controller
     /**
      * @Route("/review/save", name="save_review")
      */
-    public function getIdAction(Request $request)
+    public function saveReviewAction(Request $request)
     {
             $review_value = $request->request->get('rating');
             $comment = $request->request->get('comment');
@@ -43,6 +43,33 @@ class AjaxController extends Controller
             return new JsonResponse($arrData);
         
     }
+
+
+    /**
+     * @Route("/review/edit", name="edit_review")
+     */
+    public function editReviewAction(Request $request)
+    {
+            $review_value = $request->request->get('rating');
+            $comment = $request->request->get('comment');
+            $testimonial_id = $request->request->get('testimonial_id');
+
+            $em = $this->getDoctrine()->getManager();
+
+
+            $testimonial = $this->getDoctrine()->getRepository('AppBundle:GB_testimonial')->find($testimonial_id);
+            $testimonial->setTComment($comment);
+            $testimonial->setTRating($review_value);
+
+            $em->persist($testimonial);
+            $em->flush();    
+
+            $arrData = ['output' => $review_value ];
+            return new JsonResponse($arrData);
+        
+    }
+
+
 
 
 }

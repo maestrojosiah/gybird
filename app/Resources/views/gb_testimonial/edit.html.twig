@@ -1,21 +1,170 @@
-{% extends 'base.html.twig' %}
+
+{% if is_granted('ROLE_ADMIN') %}
+
+{% extends 'base_admin.html.twig' %}
+
+{% block stylesheets %}
+
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/css/mdb.min.css" rel="stylesheet">
+
+
+<style>
+
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+}
+
+.star-rating .fa-star{color: #A81528;}
+
+</style>
+{% endblock %}
 
 {% block body %}
-    <h1>Gb_testimonial edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('gb_testimonial_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+{% include("admin/admin_header.html.twig") %}
+{% include("admin/admin_aside.html.twig") %}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-file-text-o"></i> View Car</h3>
+            <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="{{path('admin_home_page')}}">Admin</a></li>
+                <li><i class="icon_document_alt"></i>{{gB_testimonial.car.cMake}}</li>
+                <li><i class="fa fa-file-text-o"></i>Details</li>
+            </ol>
+            </div>
+        </div>
+
+
+        <section id="doctor" class="home-section bg-gray paddingbot-60">
+            <div class="container marginbot-50">
+                <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="wow fadeInDown" data-wow-delay="0.1s">
+                    <div class="section-heading text-center">
+                        <h2 class="h-bold">Cars</h2>
+                        <p>Edit a review.</p>
+                    </div>
+                    </div>
+                    <div class="divider-short"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="star-rating">
+                    <span class="fa fa-2x fa-star-o" data-rating="1"></span>
+                    <span class="fa fa-2x fa-star-o" data-rating="2"></span>
+                    <span class="fa fa-2x fa-star-o" data-rating="3"></span>
+                    <span class="fa fa-2x fa-star-o" data-rating="4"></span>
+                    <span class="fa fa-2x fa-star-o" data-rating="5"></span>
+                    <input type="hidden" name="rating" class="rating-value" value="5">
+                    <!--Textarea with icon prefix-->
+                </div>
+                </div>
+            </div>
+
+        
+            <!--Textarea with icon prefix-->
+            <div class="md-form">
+            <i class="fa fa-pencil"></i>
+            <textarea id="review" class="md-textarea form-control" rows="3">{{gB_testimonial.tComment}}</textarea>
+            <label for="form10" style="font-size:1.5rem!important">Write A Review</label>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="submit_reviews" style="font-size:1.5rem!important">Submit Review</button>
+            <span id="warning"></span>
+            <span id="success"></span>
+            </div>
+        </section>
+    </section>
+</section>
+{% include("default/footer.html.twig") %}
+
 {% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+var $star_rating = $('.star-rating .fa');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('fa-star-o').addClass('fa-star');
+    } else {
+      return $(this).removeClass('fa-star').addClass('fa-star-o');
+    }
+  });
+};
+
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
+$(document).ready(function() {
+
+});
+
+</script>
+
+
+<script>
+ $( "#submit_reviews" ).click(function() {
+
+    var rating = $('.rating-value').val();
+    var comment = $("#review").val();
+
+    $.ajax({
+        url:'{{ (path('edit_review')) }}',
+        type: "POST",
+        dataType: "json",
+        data: {
+            "rating": rating,
+            "comment": comment,
+            "testimonial_id": "{{testimonial_id}}",
+        },
+        async: true,
+        success: function (data)
+        {
+            console.log(data.output);
+            if (data.output == 5){
+                $("#success").html("<button class='btn btn-success'>Thank you for your nice review</button>");
+            } else {
+                $("#success").html("<button class='btn btn-primary'>We promise to do better</button>");
+            }                                            
+        },
+        error: function () {
+        $("#warning").html("<button class='btn btn-danger'>somethings wrong</button>");
+    }
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    $('#submit_reviews').attr('disabled', true);
+    
+    $('#review').on('keyup',function() {
+        var textarea_value = $("#review").val();
+        
+        if(textarea_value != '') {
+            $('#submit_reviews').attr('disabled', false);
+        } else {
+            $('#submit_reviews').attr('disabled', true);
+        }
+    });
+});
+</script>
+{% endblock %}
+{% endif %}

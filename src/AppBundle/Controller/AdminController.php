@@ -6,10 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends Controller
+class AdminController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/admin_home", name="admin_home_page")
      */
     public function indexAction(Request $request)
     {
@@ -21,13 +21,11 @@ class DefaultController extends Controller
             array('deleted' => 0),
             array('id' => 'DESC')
         );
-
+        $gB_makes = $em->getRepository('AppBundle:GB_make')->findAll();
+        $gB_models = $em->getRepository('AppBundle:GB_model')->findAll();
         $gB_testimonials = $em->getRepository('AppBundle:GB_testimonial')->findAll();
-        $testimonial_chunks = array_chunk($gB_testimonials, 3, true);
 
         $car_makes = [];
-
-        $latest_car = end($gB_cars);
 
         foreach ($gB_cars as $key => $value) {
             $car_makes[] = $value->getCMake();
@@ -35,12 +33,13 @@ class DefaultController extends Controller
 
         $c_m = array_unique($car_makes);
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('admin.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'gB_cars' => $gB_cars,
+            'gB_makes' => $gB_makes,
+            'gB_models' => $gB_models,
+            'gB_testimonials' => $gB_testimonials,
             'car_makes' => $c_m,
-            'testimonial_chunks' => $testimonial_chunks,
-            'latest_car' => $latest_car,
         ]);
     }
 }

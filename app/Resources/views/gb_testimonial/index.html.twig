@@ -1,41 +1,69 @@
-{% extends 'base.html.twig' %}
+{% if is_granted('ROLE_ADMIN') %}
+
+{% extends 'base_admin.html.twig' %}
 
 {% block body %}
-    <h1>Gb_testimonials list</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Trating</th>
-                <th>Tcomment</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for gB_testimonial in gB_testimonials %}
-            <tr>
-                <td><a href="{{ path('gb_testimonial_show', { 'id': gB_testimonial.id }) }}">{{ gB_testimonial.id }}</a></td>
-                <td>{{ gB_testimonial.tRating }}</td>
-                <td>{{ gB_testimonial.tComment }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('gb_testimonial_show', { 'id': gB_testimonial.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('gb_testimonial_edit', { 'id': gB_testimonial.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('gb_testimonial_new') }}">Create a new gB_testimonial</a>
-        </li>
-    </ul>
+{% include("admin/admin_header.html.twig") %}
+{% include("admin/admin_aside.html.twig") %}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-file-text-o"></i> View Testimonials</h3>
+            <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="{{path('admin_home_page')}}">Admin</a></li>
+                <li><i class="icon_document_alt"></i>Testimonials</li>
+                <li><i class="fa fa-file-text-o"></i>Details</li>
+            </ol>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                List of all testimonials
+              </header>
+
+              <table class="table table-striped table-advance table-hover">
+                <tbody>
+                  <tr>
+                    <th><i class="icon_profile"></i> User</th>
+                    <th><i class="icon_calendar"></i> Date Submitted</th>
+                    <th><i class="icon_mail_alt"></i> Car</th>
+                    <th><i class="icon_pin_alt"></i> Stars</th>
+                    <th><i class="icon_mobile"></i> Comment</th>
+                    <th><i class="icon_cogs"></i> Manage</th>
+                  </tr>
+                  {% for gB_testimonial in gB_testimonials %}
+                  <tr>
+                    <td>{{gB_testimonial.user}}</td>
+                    <td>{{gB_testimonial.submitted|date("jS F Y")}}</td>
+                    <td>{{gB_testimonial.car.cMake }} {{gB_testimonial.car.cModel }}</td>
+                    <td>{{gB_testimonial.tRating}}</td>
+                    <td>{{gB_testimonial.tComment|length > 30 ? gB_testimonial.tComment|slice(0, 30) ~ '...' : gB_testimonial.tComment }}</td>
+                    <td>
+                      <div class="btn-group">
+                        <a class="btn btn-primary" href="{{ path('gb_car_show_admin', { 'id': gB_testimonial.car.id }) }}"><i class="icon_zoom-in_alt"></i></a>
+                        <a class="btn btn-success" href="{{ path('gb_testimonial_edit', { 'id': gB_testimonial.id }) }}"><i class="icon_pencil-edit"></i></a>
+                        <a class="btn btn-danger" href="{{ path('gb_testimonial_delete', {'id': gB_testimonial.id })}}"><i class="arrow_condense_alt"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+
+
+     </section>
+  </section>
+
 {% endblock %}
+
+{% endif %}
