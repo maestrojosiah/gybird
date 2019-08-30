@@ -14,8 +14,8 @@
           <div class="col-lg-8 col-lg-offset-2">
             <div class="wow fadeInDown" data-wow-delay="0.1s">
               <div class="section-heading text-center">
-                <h2 class="h-bold">Our facilities</h2>
-                <p>Ea melius ceteros oportere quo, pri habeo viderer facilisi ei</p>
+                <h2 class="h-bold">More photos for the car</h2>
+                <p>Click on a photo to enlarge and scroll using the controls at the top of the paged</p>
               </div>
             </div>
             <div class="divider-short"></div>
@@ -31,6 +31,9 @@
               {% for presentation in gB_presentations %}
                 <div class="item"><a href="{{presentation.pPhotoPath}}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{presentation.pPhotoPath}}" class="img-responsive" alt="img"></a></div>
               {% endfor %}
+              {% if gB_presentations|length() < 1 %}
+              <p>It seems there are no photos for this car.
+              {% endif %}
               </div>
             </div>
           </div>

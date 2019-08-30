@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class GB_carRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
+    public function searchMatchingCars($searchText)
+    {
+        return $this->createQueryBuilder('c')
+           ->where('c.cMake LIKE :input OR c.cModel LIKE :input OR c.cPrice LIKE :input OR c.cMileage LIKE :input')               
+           ->setParameter('input', '%' .$searchText.'%')
+           ->setMaxResults(10)
+           ->orderBy('c.cModel', 'ASC')
+           ->getQuery()
+           ->getResult();
+    }
+
+
 }

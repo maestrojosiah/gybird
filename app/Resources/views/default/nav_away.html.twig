@@ -17,8 +17,9 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
+                {% set home_url = app.request.getSchemeAndHttpHost() %}
           <a class="navbar-brand" href="index.html">
-                    <img src="../img/logo.jpeg" alt="" width="250" height="70" style="margin-top:-15px;" />
+                    <img src="{{home_url}}/img/logo.jpeg" alt="" width="250" height="70" style="margin-top:-15px;" />
                 </a>
         </div>
 

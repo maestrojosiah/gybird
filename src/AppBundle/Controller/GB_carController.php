@@ -148,7 +148,7 @@ class GB_carController extends Controller
         foreach ($gB_testimonials as $key => $testimonial) {
             $ratings[] = $testimonial->getTRating();
         }
-        
+        $ratings_for_this_car = count($gB_car->getTestimonials());
         $number_of_voters = count($ratings);
         $sum_of_ratings = array_sum($ratings);
         $average_of_ratings = $sum_of_ratings / $number_of_voters;
@@ -159,6 +159,7 @@ class GB_carController extends Controller
             'average_of_ratings' => $average_of_ratings,
             'sum_of_ratings' => $sum_of_ratings,
             'number_of_voters' => $number_of_voters,
+            'ratings_for_this_car' => $ratings_for_this_car,
         ));
     }
 
@@ -238,6 +239,30 @@ class GB_carController extends Controller
             $gB_car->setDeleted(0);
         } else {
             $gB_car->setDeleted(1);
+        }
+            
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($gB_car);
+        $em->flush();
+       
+
+        return $this->redirectToRoute('gb_car_index');
+
+    }
+
+    /**
+     * Marks as sold a gB_car entity.
+     *
+     * @Route("/sold/{id}", name="gb_car_sold")
+     * @Method("DELETE")
+     */
+    public function soldAction(Request $request, GB_car $gB_car)
+    {
+ 
+        if ($gB_car->getAvailability() == "available") {
+            $gB_car->setAvailability("not_available");
+        } else {
+            $gB_car->setAvailability("available");
         }
             
         $em = $this->getDoctrine()->getManager();

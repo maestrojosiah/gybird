@@ -69,6 +69,30 @@ class AjaxController extends Controller
         
     }
 
+    /**
+     * @Route("/car/search", name="search_cars")
+     */
+    public function searchCarsAction(Request $request)
+    {
+        $result_text = $request->request->get('search_text');
+        $em = $this->getDoctrine()->getManager();
+    
+        $cars = $em->getRepository('AppBundle:GB_car')
+            ->searchMatchingCars($result_text);
+
+        $result_text = [];
+        foreach ($cars as $key => $car) {
+            $result_text[] = [
+                $car->getCMake(), 
+                $car->getCModel(), 
+                $car->getCPrice(), 
+                $car->getCRegYear(), 
+                $car->getCMileage(), 
+                $this->generateUrl("gb_car_show", ['id' => $car->getId()])
+             ];
+        }
+        return new JsonResponse($result_text);
+    }
 
 
 

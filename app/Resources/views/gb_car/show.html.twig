@@ -10,6 +10,25 @@
         (function(){var w=window;var ic=w.callbell;if(typeof ic==="function"){ic('reattach_activator');ic('update',callbellSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Callbell=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://dash.callbell.eu/include/'+window.callbellSettings.token+'.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
         </script>
         <!-- End of Async Callbell Code -->
+        <style>
+            /* Container holding the image and the text */
+            .holder {
+            position: relative;
+            }
+
+            /* Bottom right text */
+            .text-block {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(168, 21, 40, 0.7);
+            color: white;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            }        
+        </style>
         {% endblock %}
         
         <div class="row">
@@ -38,14 +57,23 @@
             <div class="col-md-9">
 
                 <div class="thumbnail">
+                  <div class="holder">
                     <img class="img-responsive" src="{{gB_car.image}}" alt="">
+                    {% if gB_car.availability == "not_available" %}
+                    <div class="text-block"> 
+                        <h4 style="color: white;">This car has been reserved or sold.</h4>
+                        <a class="btn btn-primary" href="#">Browse similar models that are available</a><br /><br />
+                        <a class="btn btn-primary" href="#">Chat live to order for a similar model</a>
+                    </div>
+                    {% endif %}
+                  </div>
                     <hr />
                     <div class="caption-full">
                         <h4 class="pull-right">{{ gB_car.cPrice|number_format(0, '.', ',') }}</h4>
                         <h4><a href="#">{{ gB_car.cMake }} {{ gB_car.cModel }}</a></h4>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">{{number_of_voters}} reviews</p>
+                        <p class="pull-right">{{ratings_for_this_car}} reviews</p>
                         <p>
                             {% set rounded_rating = average_of_ratings|round %}
                             {% for i in 1..rounded_rating %}

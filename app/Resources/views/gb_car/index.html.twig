@@ -40,6 +40,7 @@
                     <th><i class="icon_cogs"></i> Price</th>
                     <th><i class="icon_cogs"></i> Transition</th>
                     <th><i class="icon_cogs"></i> Ext Color</th>
+                    <th><i class="icon_cogs"></i> Availability</th>
                     <th><i class="icon_cogs"></i> Manage</th>
                   </tr>
                   {% for gB_car in gB_cars %}
@@ -52,10 +53,12 @@
                     <td>{{gB_car.cPrice}}</td>
                     <td>{{gB_car.cTrans}}</td>
                     <td>{{gB_car.cExtColor}}</td>
+                    <td>{{gB_car.availability}}</td>
                     <td>
                       <div class="btn-group">
                         <a class="btn btn-primary" href="{{ path('gb_car_show_admin', { 'id': gB_car.id }) }}"><i class="icon_zoom-in_alt"></i></a>
                         <a class="btn btn-success" href="{{ path('gb_car_edit', { 'id': gB_car.id }) }}"><i class="icon_pencil-edit"></i></a>
+                        <a class="btn btn-warning" href="{{ path('gb_car_sold', {'id': gB_car.id })}}"><i class="icon_check"></i></a>
                         <a class="btn btn-danger" href="{{ path('gb_car_delete', {'id': gB_car.id })}}"><i class="arrow_condense_alt"></i></a>
                       </div>
                     </td>

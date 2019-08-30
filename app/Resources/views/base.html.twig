@@ -54,6 +54,55 @@
         
         {% endblock %}
 
+        <script>
+            $( "#search_input" ).keyup(function( event ) {
+            var search_text = $(this).val();
+            $("#listGroup").text("Loading...");
+            $.ajax({
+                url:'{{ (path('search_cars')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "search_text": search_text,
+                },
+                async: true,
+                success: function (data)
+                {
+                    $( "#listGroup" ).empty();
+                    if (search_text == ""){
+                    $( "#listGroup" ).empty();
+                    } else {
+                    $.each(data, function( index, value ) {
+
+                    $("#listGroup").append(
+                    '<a class="list-group-item active" target="blank"  style="z-index:1000; background-color: #a81528!important; min-width: 300px;" href="#cbp=' + value[5] + '">' +
+                        '<h6 class="list-group-item-heading">' + value[0]  + ' ' + value[1] + '</h6>' +
+                        '<p class="list-group-item-text">Kes ' + value[2] + ' | ' + value[3] + ' | ' + value[4] + ' Km.</p>' +
+                    '</a>');
+                    });  
+                    }         
+                },
+                error: function (xhr, status, error) {
+                    console.log('error');
+                }
+            });
+
+            });
+        </script>
+
+        <script>
+            $( "#to_reload" ).on( "click", function() {
+                location.reload();
+            });
+
+        </script>
 
     </body>
 </html>
+
+              <div class="list-group">
+                <a class="list-group-item " href="javascript:;">
+                  <h4 class="list-group-item-heading">List group item heading</h4>
+                  <p class="list-group-item-text">eget risus varius blandit.</p>
+                </a>
+              </div>
