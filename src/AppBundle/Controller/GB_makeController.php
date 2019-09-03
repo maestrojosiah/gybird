@@ -101,20 +101,16 @@ class GB_makeController extends Controller
     /**
      * Deletes a gB_make entity.
      *
-     * @Route("/{id}", name="gb_make_delete")
+     * @Route("/delete/{id}", name="gb_make_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, GB_make $gB_make)
     {
-        $form = $this->createDeleteForm($gB_make);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($gB_make);
-            $em->flush();
-        }
-
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($gB_make);
+        $em->flush();
+        
         return $this->redirectToRoute('gb_make_index');
     }
 

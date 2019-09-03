@@ -101,19 +101,15 @@ class GB_modelController extends Controller
     /**
      * Deletes a gB_model entity.
      *
-     * @Route("/{id}", name="gb_model_delete")
+     * @Route("/delete/{id}", name="gb_model_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, GB_model $gB_model)
     {
-        $form = $this->createDeleteForm($gB_model);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($gB_model);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($gB_model);
+        $em->flush();
 
         return $this->redirectToRoute('gb_model_index');
     }

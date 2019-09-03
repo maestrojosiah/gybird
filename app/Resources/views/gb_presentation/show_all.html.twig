@@ -29,7 +29,7 @@
             <div class="wow bounceInUp" data-wow-delay="0.2s">
               <div id="owl-works" class="owl-carousel">
               {% for presentation in gB_presentations %}
-                <div class="item"><a href="{{presentation.pPhotoPath}}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{presentation.pPhotoPath}}" class="img-responsive" alt="img"></a></div>
+                <div class="item"><a href="{{presentation.pPhotoPath}}" title="{{presentation.pDescription|striptags|raw }}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{presentation.pPhotoPath}}" class="img-responsive" alt="img"></a></div>
               {% endfor %}
               {% if gB_presentations|length() < 1 %}
               <p>It seems there are no photos for this car.

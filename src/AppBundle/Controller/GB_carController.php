@@ -187,12 +187,22 @@ class GB_carController extends Controller
     public function editAction(Request $request, GB_car $gB_car)
     {
  
+        $file_pointer = $this->get('kernel')->getProjectDir()."/web".$gB_car->getImage();
+
         $deleteForm = $this->createDeleteForm($gB_car);
         $editForm = $this->createForm('AppBundle\Form\GB_carType', $gB_car);
         $editForm->handleRequest($request);
         $formerFileName = $gB_car->getImage();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+            if (!unlink($file_pointer)) { 
+                $message = "$file_pointer cannot be deleted due to an error"; 
+            } 
+            else { 
+                $message = "$file_pointer has been deleted"; 
+            } 
+            
             $image = $editForm->get('image')->getData();
             $make = $editForm->get('cMake')->getData();
             $model = $editForm->get('cModel')->getData();

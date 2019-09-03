@@ -74,11 +74,12 @@ class GB_presentationController extends Controller
             $make = $car->getCMake();
             $gB_presentation->setPDeleted(0);            
             $car_title = $car->getCModel();
+            $car_id = $car->getId();
             $trimmed_title = str_replace(" ", "_", $car_title);
             $originalName = $photo_path->getClientOriginalName();;
-            $filepath = $this->get('kernel')->getProjectDir()."/web/img/cars/$make/$trimmed_title/";
+            $filepath = $this->get('kernel')->getProjectDir()."/web/img/cars/$make/$trimmed_title/$car_id/";
             $photo_path->move($filepath, $originalName);
-            $simple_filepath = "/img/cars/$make/$trimmed_title/";
+            $simple_filepath = "/img/cars/$make/$trimmed_title/$car_id/";
             $gB_presentation->setPPhotoPath($simple_filepath . $originalName);
             $em = $this->getDoctrine()->getManager();
             $em->persist($gB_presentation);
@@ -119,27 +120,33 @@ class GB_presentationController extends Controller
      */
     public function editAction(Request $request, GB_presentation $gB_presentation)
     {
+
+        $file_pointer = $this->get('kernel')->getProjectDir()."/web".$gB_presentation->getPPhotoPath();
+
         $deleteForm = $this->createDeleteForm($gB_presentation);
         $editForm = $this->createForm('AppBundle\Form\GB_presentationType', $gB_presentation);
         $editForm->handleRequest($request);
 
-        // if ($editForm->isSubmitted() && $editForm->isValid()) {
-        //     $this->getDoctrine()->getManager()->flush();
-
-        //     return $this->redirectToRoute('gb_presentation_edit', array('id' => $gB_presentation->getId()));
-        // }
-
         $car = $gB_presentation->getCar();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            if (!unlink($file_pointer)) { 
+                $message = "$file_pointer cannot be deleted due to an error"; 
+            } 
+            else { 
+                $message = "$file_pointer has been deleted"; 
+            } 
+            
             $photo_path = $editForm->get('pPhotoPath')->getData();
             $make = $car->getCMake();
             $car_title = $car->getCModel();
+            $car_id = $car->getId();
             $trimmed_title = str_replace(" ", "_", $car_title);
             $originalName = $photo_path->getClientOriginalName();;
-            $filepath = $this->get('kernel')->getProjectDir()."/web/img/cars/$make/$trimmed_title/";
+            $filepath = $this->get('kernel')->getProjectDir()."/web/img/cars/$make/$trimmed_title/$car_id/";
             $photo_path->move($filepath, $originalName);
-            $simple_filepath = "/img/cars/$make/$trimmed_title/";
+            $simple_filepath = "/img/cars/$make/$trimmed_title/$car_id/";
             $gB_presentation->setPPhotoPath($simple_filepath . $originalName);
             $em = $this->getDoctrine()->getManager();
             $em->persist($gB_presentation);
@@ -163,21 +170,26 @@ class GB_presentationController extends Controller
     /**
      * Deletes a gB_presentation entity.
      *
-     * @Route("/{id}", name="gb_presentation_delete")
+     * @Route("/delete/{id}", name="gb_presentation_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, GB_presentation $gB_presentation)
     {
-        $form = $this->createDeleteForm($gB_presentation);
-        $form->handleRequest($request);
+        $file_pointer = $this->get('kernel')->getProjectDir()."/web".$gB_presentation->getPPhotoPath();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($gB_presentation);
-            $em->flush();
-        }
+        if (!unlink($file_pointer)) { 
+            $message = "$file_pointer cannot be deleted due to an error"; 
+        } 
+        else { 
+            $message = "$file_pointer has been deleted"; 
+        } 
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($gB_presentation);
+        $em->flush();
+        
 
-        return $this->redirectToRoute('gb_presentation_index');
+        return $this->redirectToRoute('gb_car_show_admin', array('id' => $gB_presentation->getCar()->getId()));
     }
 
     /**

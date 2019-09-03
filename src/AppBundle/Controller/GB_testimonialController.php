@@ -103,19 +103,15 @@ class GB_testimonialController extends Controller
     /**
      * Deletes a gB_testimonial entity.
      *
-     * @Route("/{id}", name="gb_testimonial_delete")
+     * @Route("/delete/{id}", name="gb_testimonial_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, GB_testimonial $gB_testimonial)
     {
-        $form = $this->createDeleteForm($gB_testimonial);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($gB_testimonial);
-            $em->flush();
-        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($gB_testimonial);
+        $em->flush();
 
         return $this->redirectToRoute('gb_testimonial_index');
     }

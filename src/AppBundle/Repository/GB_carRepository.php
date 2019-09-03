@@ -15,8 +15,10 @@ class GB_carRepository extends \Doctrine\ORM\EntityRepository
     public function searchMatchingCars($searchText)
     {
         return $this->createQueryBuilder('c')
-           ->where('c.cMake LIKE :input OR c.cModel LIKE :input OR c.cPrice LIKE :input OR c.cMileage LIKE :input')               
+           ->where('c.cMake LIKE :input OR c.cModel LIKE :input OR c.cPrice LIKE :input OR c.cMileage LIKE :input')   
+           ->andWhere('c.deleted = :val')            
            ->setParameter('input', '%' .$searchText.'%')
+           ->setParameter('val','0')
            ->setMaxResults(10)
            ->orderBy('c.cModel', 'ASC')
            ->getQuery()
