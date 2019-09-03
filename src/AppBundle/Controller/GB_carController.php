@@ -67,6 +67,87 @@ class GB_carController extends Controller
     }
 
     /**
+     * Lists all search results of GB cars.
+     *
+     * @Route("/search_results", name="gb_car_show_results")
+     * @Method({"GET", "POST"})
+     */
+    public function showResultsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $_POST;
+        $q_string = "";
+        if($post['make'] != "any") {
+            $q_string .= "AND g_b_car.c_make = '". $post['make'] . "'";
+            $and = true;
+        }
+        if($post['model'] != "any") {
+            $q_string .= "AND g_b_car.c_model = '". $post['model'] . "'";
+        }
+
+        if(isset($post['steering'])){
+
+            if($post['steering'] != "any") {
+                $q_string .= "AND g_b_car.c_steering = '". $post['steering'] . "'";
+            }
+
+            if($post['eng_cap_from'] != "any") {
+                $q_string .= "AND g_b_car.c_eng_cap >= '". $post['eng_cap_from'] . "'";
+            }
+
+            if($post['eng_cap_to'] != "any") {
+                $q_string .= "AND g_b_car.c_eng_cap <= '". $post['eng_cap_to'] . "'";
+            }
+
+            if($post['reg_year_from'] != "any") {
+                $q_string .= "AND g_b_car.c_reg_year >= '". $post['reg_year_from'] . "'";
+            }
+
+            if($post['reg_year_to'] != "any") {
+                $q_string .= "AND g_b_car.c_reg_year <= '". $post['reg_year_to'] . "'";
+            }
+
+            if($post['price_from'] != "any") {
+                $q_string .= "AND g_b_car.c_price >= '". $post['price_from'] . "'";
+            }
+
+            if($post['price_to'] != "any") {
+                $q_string .= "AND g_b_car.c_price <= '". $post['price_to'] . "'";
+            }
+
+        }
+
+        $RAW_QUERY = "SELECT * FROM g_b_car where g_b_car.id > 0 AND g_b_car.deleted = 0 AND g_b_car.availability = 'available' " . $q_string . ' LIMIT 500;';
+        
+        $statement = $em->getConnection()->prepare($RAW_QUERY);
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        $gB_cars = $em->getRepository('AppBundle:GB_car')->findBy(
+            array('deleted' => 0),
+            array('id' => 'DESC')
+        );
+
+        $car_makes = [];
+
+        foreach ($gB_cars as $key => $value) {
+            $car_makes[] = $value->getCMake();
+        }
+
+        $c_m = array_unique($car_makes);
+
+
+
+        return $this->render('gb_car/results.html.twig', array(
+            'gB_cars' => $gB_cars,
+            'car_makes' => $c_m,
+            'result' => $result,
+            'post' => $post,
+        ));
+    }
+
+    /**
      * Lists all deleted gB_car entities.
      *
      * @Route("/deleted", name="gb_car_deleted_index")

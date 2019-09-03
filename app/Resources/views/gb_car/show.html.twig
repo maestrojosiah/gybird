@@ -62,8 +62,12 @@
                     {% if gB_car.availability == "not_available" %}
                     <div class="text-block"> 
                         <h4 style="color: white;">This car has been reserved or sold.</h4>
-                        <a class="btn btn-primary" href="#">Browse similar models that are available</a><br /><br />
-                        <a class="btn btn-primary" href="#">Chat live to order for a similar model</a>
+                        <form method="post" action="{{path('gb_car_show_results')}}" class="inline">
+                            <input type="hidden" name="make" value="{{gB_car.cMake}}">
+                            <input type="hidden" name="model" value="{{gB_car.cModel}}">
+                            <button class="btn btn-primary" type="submit">Browse similar models that are available</button><br /><br />
+                        </form>
+                        <a class="btn btn-primary" target="blank" href="https://tawk.to/chat/5d67bba477aa790be33164e1/default">Chat live to order for a similar model</a>
                     </div>
                     {% endif %}
                   </div>

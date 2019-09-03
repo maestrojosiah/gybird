@@ -40,16 +40,16 @@
                       {# <div id="sendmessage">Your message has been sent. Thank you!</div> #}
                       <div id="errormessage"></div>
 
-                      <form action="" method="post" id="purchace_form" role="form" class="contactForm lead">
+                      <form action="{{path('gb_car_show_results')}}" method="post" id="purchace_form" role="form" class="contactForm lead">
                         <div class="row">
                           <div class="col-xs-6 col-sm-6 col-md-6">
                            <div class="form-group">
                             <label for="make">Make:</label>
-                            <select class="form-control" id="make">
-                              <option>Any</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="make">
+                              <option value="any">Any</option>
+                              {% for make in car_makes %}
+                                <option value="{{make}}">{{make|upper}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -57,11 +57,11 @@
                           <div class="col-xs-6 col-sm-6 col-md-6">
                            <div class="form-group">
                             <label for="model">Model:</label>
-                            <select class="form-control" id="model">
-                              <option>Any</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="model">
+                              <option value="any">Any</option>
+                              {% for model in car_models %}
+                                <option value="{{model}}">{{model|upper}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -71,11 +71,11 @@
                           <div class="col-xs-12 col-sm-4 col-md-4">
                            <div class="form-group">
                             <label for="steering">Steering:</label>
-                            <select class="form-control" id="steering">
-                              <option>Any</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="steering">
+                              <option value="any">Any</option>
+                              {% for st in steering %}
+                                <option value="{{st}}">{{st|upper}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -83,11 +83,11 @@
                           <div class="col-xs-6 col-sm-4 col-md-4">
                            <div class="form-group">
                             <label for="eng_cap_from">Engine Capacity:</label>
-                            <select class="form-control" id="eng_cap_from">
-                              <option>From</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="eng_cap_from">
+                              <option value="any">From</option>
+                              {% for val in car_eng_cap %}
+                                <option value="{{val}}">{{val}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -95,11 +95,11 @@
                           <div class="col-xs-6 col-sm-4 col-md-4">
                            <div class="form-group">
                             <label for="eng_cap_to">:</label>
-                            <select class="form-control" id="eng_cap_to">
-                              <option>To</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="eng_cap_to">
+                              <option value="any">To</option>
+                              {% for val in car_eng_cap %}
+                                <option value="{{val}}">{{val}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -109,11 +109,11 @@
                           <div class="col-xs-6 col-sm-3 col-md-3">
                            <div class="form-group">
                             <label for="reg_year_from" class="thin">Reg. Year:</label>
-                            <select class="form-control" id="reg_year_from">
-                              <option>From</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="reg_year_from">
+                              <option value="any">From</option>
+                              {% for val in car_reg_year %}
+                                <option value="{{val}}">{{val}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -121,11 +121,11 @@
                           <div class="col-xs-6 col-sm-3 col-md-3">
                            <div class="form-group">
                             <label for="reg_year_to">:</label>
-                            <select class="form-control" id="reg_year_to">
-                              <option>To</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="reg_year_to">
+                              <option value="any">To</option>
+                              {% for val in car_reg_year %}
+                                <option value="{{val}}">{{val}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -133,11 +133,11 @@
                           <div class="col-xs-6 col-sm-3 col-md-3">
                            <div class="form-group">
                             <label for="price_from">Price:</label>
-                            <select class="form-control" id="price_from">
-                              <option>From</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="price_from">
+                              <option value="any">From</option>
+                              {% for val in car_price %}
+                                <option value="{{val}}">{{val}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
@@ -145,11 +145,11 @@
                           <div class="col-xs-6 col-sm-3 col-md-3">
                            <div class="form-group">
                             <label for="price_to">:</label>
-                            <select class="form-control" id="price_to">
-                              <option>To</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                            <select class="form-control" name="price_to">
+                              <option value="any">To</option>
+                              {% for val in car_price %}
+                                <option value="{{val}}">{{val}}</option>
+                              {% endfor %}
                             </select>
                             <div class="validation"></div>
                            </div> 
