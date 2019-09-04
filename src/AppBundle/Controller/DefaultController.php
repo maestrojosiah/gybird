@@ -60,6 +60,7 @@ class DefaultController extends Controller
             'car_models' => $c_md,
             'steering' => $st,
             'testimonial_chunks' => $testimonial_chunks,
+            'testimonials' => $gB_testimonials,
             'latest_car' => $latest_car,
             'car_eng_cap' => $eng_c,
             'car_reg_year' => $reg_y,

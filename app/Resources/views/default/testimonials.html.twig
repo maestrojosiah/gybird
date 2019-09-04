@@ -2,15 +2,15 @@
     <!-- Section: testimonial -->
     <section id="testimonial" class="home-section paddingbot-60 parallax" data-stellar-background-ratio="0.5">
 
-      <div class="carousel-reviews broun-block">
+      <div class="carousel-reviews broun-block hidden-xs">
         <div class="container">
           <div class="row">
             <div id="carousel-reviews" class="carousel slide" data-ride="carousel">
 
               <div class="carousel-inner">
-              {% for testimonial_chunk in testimonial_chunks %}
+               {% for testimonial_chunk in testimonial_chunks %}
                 <div class="item {% if loop.index0 == 0 %} active {% endif %}">
-                {% for testimonial in testimonial_chunk %}
+                 {% for testimonial in testimonial_chunk %}
                   <div class="col-md-4 col-sm-6">
                     <div class="block-text rel zmin">
                       <a title="" href="#">{{testimonial.car.cMake}} {{testimonial.car.cModel}}</a>
@@ -35,17 +35,62 @@
                       <span>Kenya</span>
                     </div>
                   </div>
-                {% endfor %}
-               </div>
-              {% endfor %}
-
-
+                 {% endfor %}
+                </div>
+               {% endfor %}
               </div>
 
               <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
               <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-reviews2 broun-block hidden-md hidden-lg">
+        <div class="container">
+          <div class="row">
+            <div id="carousel-reviews2" class="carousel slide" data-ride="carousel">
+
+              <div class="carousel-inner">
+               {% for testimonial in testimonials %}
+                <div class="item {% if loop.index0 == 0 %} active {% endif %}">
+                  <div class="col-md-4 col-sm-6">
+                    <div class="block-text rel zmin">
+                      <a title="" href="#">{{testimonial.car.cMake}} {{testimonial.car.cModel}}</a>
+                      <div class="mark">My rating: 
+                            {% for i in 1..testimonial.tRating %}
+                            <span class="glyphicon glyphicon-star"></span>
+                            {% endfor %}
+                            {% set remaining = 5 - testimonial.tRating %}
+                            {% if remaining > 0 %}
+                            {% for i in 1..remaining %}
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            {% endfor %}
+                            {% endif %}
+
+                      </div>
+                      <p>{{testimonial.tComment|length > 100 ? testimonial.tComment|slice(0, 100) ~ '...' : testimonial.tComment }}</p>
+                      <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                    </div>
+                    <div class="person-text rel text-light">
+                      <img src="img/user_placeholder.png" alt="" class="person img-circle" />
+                      <a title="" href="#">{{testimonial.user}}</a>
+                      <span>Kenya</span>
+                    </div>
+                  </div>
+                </div>
+               {% endfor %}
+              </div>
+
+              <a class="left carousel-control" href="#carousel-reviews2" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+              <a class="right carousel-control" href="#carousel-reviews2" role="button" data-slide="next">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
             </div>
